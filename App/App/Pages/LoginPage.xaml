@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:App.ViewModels"
+             x:Class="App.Pages.LoginPage"
+             x:DataType="viewmodels:LoginPageViewModel"
+             Title="LoginPage">
+
+    <Grid BackgroundColor="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="180"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <StackLayout>
+
+            <Label Text="Login"
+                   FontSize="Title"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Margin="0,100,0,0"/>
+        </StackLayout>
+
+        <Grid RowSpacing="7" Grid.Row="1" Margin="20,20,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Entry Grid.Row="1" Text="{Binding UserName}" Placeholder="Username" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+            <Entry Grid.Row="2" Text="{Binding Password}" IsPassword="True" Placeholder="Password" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+
+            <Button Grid.Row="3" Text="Sign In" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding LoginCommand}"/>
+
+            <StackLayout Grid.Row="4" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Label Text="New User?  " TextColor="DarkGray" FontSize="Small"/>
+                <Label Text="Sign Up" TextColor="Blue" FontAttributes="Bold" FontSize="Small" TextDecorations="Underline">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoToRegisterCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </Grid>
+    </Grid>
+    
+</ContentPage>
