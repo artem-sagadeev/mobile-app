@@ -17,6 +17,7 @@ public class PostsService
     {
         var posts = await _context.Posts
             .Where(post => post.UserId == userId)
+            .OrderByDescending(post => post.PostDateTime)
             .ToListAsync();
 
         return posts;
@@ -28,7 +29,8 @@ public class PostsService
         {
             Title = dto.Title,
             Text = dto.Text,
-            UserId = dto.UserId
+            UserId = dto.UserId,
+            PostDateTime = DateTime.UtcNow
         };
 
         _context.Posts.Add(post);
@@ -43,5 +45,20 @@ public class PostsService
 
         _context.Posts.Remove(post);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<List<Post>> GetFeed(int userId)
+    {
+        var subscriptions = await _context.Subscriptions
+            .Where(subscription => subscription.SubscriberId == userId)
+            .Select(subscription => subscription.SubscribedToId)
+            .ToListAsync();
+
+        var posts = await _context.Posts
+            .Where(post => subscriptions.Contains(post.UserId))
+            .OrderByDescending(post => post.PostDateTime)
+            .ToListAsync();
+
+        return posts;
     }
 }

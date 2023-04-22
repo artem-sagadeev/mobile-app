@@ -11,5 +11,7 @@ namespace App.Services
         Task AddPost(string title, string text);
 
         Task DeletePost(Post post);
+
+        Task<List<Post>> GetFeed(int userId);
     }
 }

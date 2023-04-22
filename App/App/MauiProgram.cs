@@ -20,8 +20,7 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		builder.Services.AddSingleton<UsersRepository>();
-        builder.Services.AddSingleton<PostsRepository>();
+		builder.Services.AddSingleton<LoggedInUsersRepository>();
         builder.Services.AddSingleton<IUserService, RemoteUserService>();
 		builder.Services.AddSingleton<IPostService, RemotePostService>();
 

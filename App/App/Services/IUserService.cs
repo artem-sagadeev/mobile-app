@@ -6,8 +6,14 @@ namespace App.Services
     {
         Task<User> Login(string username, string password);
 
-        Task Register(User user);
+        Task<int> Register(User user);
 
         Task<List<User>> Search(int userId, string searchTerm);
+
+        Task Subscribe(int subscribeToId);
+
+        Task Unsubscribe(int subscribeToId);
+
+        Task<List<int>> GetSubscriptionsIds(int userId);
     }
 }

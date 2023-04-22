@@ -52,5 +52,15 @@ namespace App.Services
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<Post>> GetFeed(int userId)
+        {
+            var url = BaseUrl + $"feed?userId={userId}";
+            var response = await _httpClient.GetAsync(url);
+            var content = await response.Content.ReadAsStringAsync();
+            var posts = JsonConvert.DeserializeObject<List<Post>>(content);
+
+            return posts;
+        }
     }
 }

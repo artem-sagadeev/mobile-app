@@ -39,4 +39,28 @@ public class UsersController : ControllerBase
 
         return Ok(users);
     }
+
+    [HttpPost("subscribe")]
+    public async Task<ActionResult> Subscribe(SubscribeDto dto)
+    {
+        await _usersService.Subscribe(dto);
+
+        return Ok();
+    }
+    
+    [HttpPost("unsubscribe")]
+    public async Task<ActionResult> Unsubscribe(SubscribeDto dto)
+    {
+        await _usersService.Unsubscribe(dto);
+
+        return Ok();
+    }
+    
+    [HttpGet("subscriptions")]
+    public async Task<ActionResult<List<int>>> Search(int userId)
+    {
+        var ids = await _usersService.GetSubscriptionsIds(userId);
+
+        return Ok(ids);
+    }
 }

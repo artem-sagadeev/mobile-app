@@ -1,4 +1,5 @@
 ﻿using App.Models;
+using App.Repositories;
 using App.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -9,10 +10,12 @@ namespace App.ViewModels
     public partial class RegisterPageViewModel : BaseViewModel
     {
         private readonly IUserService _userService;
+        private readonly LoggedInUsersRepository _loggedInUsersRepository;
 
-        public RegisterPageViewModel(IUserService loginService)
+        public RegisterPageViewModel(IUserService loginService, LoggedInUsersRepository loggedInUsersRepository)
         {
             _userService = loginService;
+            _loggedInUsersRepository = loggedInUsersRepository;
         }
 
         [ObservableProperty]
@@ -53,7 +56,16 @@ namespace App.ViewModels
                 Password = Password
             };
 
-            await _userService.Register(user);
+            var userId = await _userService.Register(user);
+            user.Id = userId;
+
+            var loggedInUser = new LoggedInUser
+            {
+                Id = user.Id,
+                Username = user.Username,
+                IsLoggedIn = true
+            };
+            await _loggedInUsersRepository.SaveUserAsync(loggedInUser);
 
             if (Preferences.ContainsKey(nameof(App.User)))
             {

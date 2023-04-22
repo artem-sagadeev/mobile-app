@@ -39,4 +39,12 @@ public class PostsController : ControllerBase
 
         return Ok();
     }
+
+    [HttpGet("feed")]
+    public async Task<ActionResult<List<Post>>> GetFeed(int userId)
+    {
+        var posts = await _postsService.GetFeed(userId);
+
+        return posts;
+    }
 }

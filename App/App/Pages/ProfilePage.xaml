@@ -32,8 +32,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Column="0" Text="{Binding Title}" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="Start"/>
-                            <Button Grid.Column="1" Text="Delete" VerticalOptions="Center" HorizontalOptions="End" x:DataType="viewmodels:ProfilePageViewModel" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ProfilePageViewModel}}, 
-                                Path=DeleteCommand}" CommandParameter="{Binding .}"/>
+                            <Button Grid.Column="1" Text="Delete" VerticalOptions="Center" HorizontalOptions="End" x:DataType="viewmodels:ProfilePageViewModel" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ProfilePageViewModel}}, Path=DeleteCommand}" CommandParameter="{Binding .}"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

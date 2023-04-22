@@ -9,4 +9,6 @@ public class Post
     public string Text { get; set; }
 
     public int UserId { get; set; }
+
+    public DateTime PostDateTime { get; set; }
 }

@@ -18,7 +18,7 @@ namespace App.ViewModels
 
         public async Task OnAppearing()
         {
-            Posts = await _postService.GetUserPosts(App.User.Id);
+            Posts = await _postService.GetFeed(App.User.Id);
         }
     }
 }

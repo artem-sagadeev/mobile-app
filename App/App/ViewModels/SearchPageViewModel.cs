@@ -1,4 +1,5 @@
-﻿using App.Models;
+﻿using App.Dtos;
+using App.Models;
 using App.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -18,18 +19,43 @@ namespace App.ViewModels
         private string _searchTerm;
 
         [ObservableProperty]
-        private List<User> _users;
+        private List<SearchUserDto> _users;
 
         [RelayCommand]
         public async Task Search()
         {
-            Users = await _userService.Search(App.User.Id, SearchTerm);
+            var users = await _userService.Search(App.User.Id, (string)this.SearchTerm);
+            var subscribtionsIds = await _userService.GetSubscriptionsIds(App.User.Id);
+
+            Users = users
+                .Select(user => new SearchUserDto
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    IsSubscribedTo = subscribtionsIds.Contains(user.Id),
+                    IsNotSubscribedTo = !subscribtionsIds.Contains(user.Id)
+                })
+                .ToList();
+        }
+
+        [RelayCommand]
+        public async Task Subscribe(SearchUserDto dto)
+        {
+            await _userService.Subscribe(dto.Id);
+            await Search();
+        }
+
+        [RelayCommand]
+        public async Task Unsubscribe(SearchUserDto dto)
+        {
+            await _userService.Unsubscribe(dto.Id);
+            await Search();
         }
 
         public void OnAppearing()
         {
             SearchTerm = string.Empty;
-            Users = new List<User>();
+            Users = new List<SearchUserDto>();
         }
     }
 }
