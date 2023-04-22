@@ -23,5 +23,10 @@ namespace App.Services
         {
             await _usersRepository.SaveUserAsync(user);
         }
+
+        public Task<List<User>> Search(int userId, string searchTerm)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:App.ViewModels"
+             xmlns:models="clr-namespace:App.Models"
              x:Class="App.Pages.FeedPage"
+             x:DataType="viewmodels:FeedPageViewModel"
              Title="Feed">
-    <VerticalStackLayout>
-        <Label 
-            Text="Feed"
-            FontSize="Large"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <Grid RowSpacing="20">
+        <ListView Grid.Row="0" Grid.ColumnSpan="1" ItemsSource="{Binding Posts}" HasUnevenRows="true">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Post">
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Text="{Binding Title}" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Center"/>
+                            <Label Grid.Row="1" Text="{Binding Text}" FontSize="Medium" VerticalOptions="Start" HorizontalOptions="Start"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </ContentPage>

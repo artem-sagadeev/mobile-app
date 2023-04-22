@@ -26,14 +26,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="200"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <Entry Grid.Row="1" Text="{Binding PostTitle}" Placeholder="Title" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
-            <Entry Grid.Row="2" Text="{Binding PostText}" Placeholder="Text" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+            <Editor AutoSize="TextChanges" Grid.Row="2" Text="{Binding PostText}" Placeholder="Text" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
             <Button Grid.Row="3" Text="Add" TextColor="White" FontAttributes="Bold" CornerRadius="30" WidthRequest="200" Margin="0,15,0,0" Command="{Binding AddPostCommand}"/>
         </Grid>

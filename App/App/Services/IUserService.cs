@@ -7,5 +7,7 @@ namespace App.Services
         Task<User> Login(string username, string password);
 
         Task Register(User user);
+
+        Task<List<User>> Search(int userId, string searchTerm);
     }
 }

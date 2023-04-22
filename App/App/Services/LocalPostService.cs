@@ -43,5 +43,10 @@ namespace App.Services
         {
             await _postsRepository.DeletePostAsync(post);
         }
+
+        public Task<Post> GetPost(int postId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -6,7 +6,6 @@ public partial class AddPage : ContentPage
 {
 	private readonly AddPageViewModel _addPageViewModel;
 
-
     public AddPage(AddPageViewModel addPageViewModel)
 	{
 		InitializeComponent();
